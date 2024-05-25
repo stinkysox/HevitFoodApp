@@ -1,0 +1,23 @@
+.options-container {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.menu-btn {
+  border: none;
+  padding: 10px 16px;
+  border-radius: 6px;
+  margin: 8px;
+  font-weight: 500;
+  font-family: 'roboto';
+  cursor: pointer;
+  transition: all 0.5s ease;
+  width: 180px;
+}
+
+.active {
+  background-color: lightcoral;
+  color: white;
+  font-weight: bold;
+}

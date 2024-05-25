@@ -1,0 +1,42 @@
+.w-header {
+  display: flex;
+  justify-content: space-between;
+  padding: 10px 30px;
+  background-color: lightcoral;
+}
+
+.header-cart-container {
+  display: flex;
+  align-items: center;
+  position: relative;
+}
+
+.my-orders {
+  margin-right: 20px;
+  color: white;
+  font-size: 18px;
+  font-weight: 500;
+}
+
+.cart-container {
+  position: relative;
+}
+
+.count-container {
+  position: absolute;
+  top: 0;
+  right: 0;
+  height: 20px;
+  min-width: 20px;
+  padding: 5px;
+  border-radius: 50%;
+  background-color: orange;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-weight: bold;
+  font-size: 12px;
+  transform: translate(50%, 50%);
+  z-index: 10;
+}
