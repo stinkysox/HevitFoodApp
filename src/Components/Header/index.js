@@ -3,12 +3,12 @@ import {useContext} from 'react'
 import {FaShoppingCart} from 'react-icons/fa'
 import CartContext from '../../context/CartContext'
 
-const Header = () => {
+const Header = ({restaurantName}) => {
   const {cartList} = useContext(CartContext)
 
   return (
     <div className="w-header">
-      <h1 className="header-heading">UNI Resto Cafe Header</h1>
+      <h1 className="header-heading">{restaurantName}</h1>
 
       <div className="header-cart-container">
         <p className="my-orders">My Orders</p>
