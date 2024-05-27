@@ -3,6 +3,8 @@
   justify-content: space-between;
   padding: 10px 30px;
   background-color: lightcoral;
+  text-decoration: none !important;
+  color: white;
 }
 
 .header-cart-container {
@@ -11,6 +13,10 @@
   position: relative;
 }
 
+.header-heading {
+  cursor: pointer;
+  color: white;
+}
 .my-orders {
   margin-right: 20px;
   color: white;
@@ -20,6 +26,7 @@
 
 .cart-container {
   position: relative;
+  text-decoration: none;
 }
 
 .count-container {

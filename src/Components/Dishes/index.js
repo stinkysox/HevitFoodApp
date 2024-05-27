@@ -3,7 +3,7 @@ import {useState, useContext} from 'react'
 import CartContext from '../../context/CartContext'
 
 const Dishes = props => {
-  const {details} = props
+  const {details, activeCategory} = props
   const [count, setCount] = useState(0)
   const {addCartItem, removeCartItem} = useContext(CartContext)
 
@@ -22,14 +22,12 @@ const Dishes = props => {
 
   const isCustomAvailable = addonCat.length !== 0
 
-  const handleDecrease = () => {
-    setCount(prev => (prev > 0 ? prev - 1 : 0))
-    removeCartItem(dishId)
-  }
-
   const handleIncrease = () => {
     setCount(prevCount => prevCount + 1)
-    addCartItem({...details, quantity: count + 1})
+  }
+
+  const handleAddItem = () => {
+    addCartItem({...details, quantity: count})
   }
 
   return (
@@ -41,25 +39,37 @@ const Dishes = props => {
         <h1 className="dish-name">{dishName}</h1>
         <p className="dish-currency">{`${dishCurrency} ${dishPrice}`}</p>
         <p className="dish-description">{dishDescription}</p>
+
         {dishAvailability ? (
           <div>
             <div className="buttons-container">
               <button
                 className="minus-button"
-                onClick={handleDecrease}
                 type="button"
+                onClick={() =>
+                  setCount(prevCount => (prevCount > 0 ? prevCount - 1 : 0))
+                }
               >
                 -
               </button>
               <p className="count">{count}</p>
               <button
                 className="plus-btn"
-                onClick={handleIncrease}
                 type="button"
+                onClick={handleIncrease}
               >
                 +
               </button>
             </div>
+            {count > 0 && (
+              <button
+                className="add-to-cart-btn"
+                type="button"
+                onClick={handleAddItem}
+              >
+                ADD TO CART
+              </button>
+            )}
             {isCustomAvailable && (
               <p className="custom-text">Customizations available</p>
             )}

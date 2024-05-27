@@ -117,6 +117,17 @@
 .custom-text {
   color: rgb(29, 29, 255);
 }
+
+.add-to-cart-btn {
+  margin-top: 14px;
+  border: none;
+  background-color: lightskyblue;
+  color: snow;
+  font-weight: bold;
+  padding: 8px 12px;
+  cursor: pointer;
+  border-radius: 8px;
+}
 @media (max-width: 768px) {
   .dish-image {
     height: 140px;

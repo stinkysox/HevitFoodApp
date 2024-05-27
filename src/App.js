@@ -1,6 +1,8 @@
 import {Component} from 'react'
+import {BrowserRouter as Router, Switch, Route} from 'react-router-dom'
 import './App.css'
 import HomeRoute from './Components/HomeRoute'
+import CartRoute from './Components/CartRoute'
 import CartContext from './context/CartContext'
 
 class App extends Component {
@@ -16,35 +18,50 @@ class App extends Component {
     if (itemExists) {
       const updatedCartList = cartList.map(eachItem => {
         if (eachItem.dishId === item.dishId) {
-          return {...eachItem, quantity: eachItem.quantity + 1}
+          return {...eachItem, quantity: eachItem.quantity + item.quantity}
         }
         return eachItem
       })
-
       this.setState({cartList: updatedCartList})
     } else {
-      this.setState({cartList: [...cartList, {...item, quantity: 1}]})
+      this.setState({
+        cartList: [...cartList, {...item, quantity: item.quantity}],
+      })
     }
   }
 
   removeCartItem = id => {
     const {cartList} = this.state
-    const itemExists = cartList.some(eachItem => eachItem.dishId === id)
+    const updatedCartList = cartList.filter(eachItem => eachItem.dishId !== id)
+    this.setState({cartList: updatedCartList})
+  }
 
-    if (itemExists) {
-      const updatedCartList = cartList.map(eachItem => {
+  incrementCartItemQuantity = id => {
+    const {cartList} = this.state
+    const updatedCartList = cartList.map(eachItem => {
+      if (eachItem.dishId === id) {
+        return {...eachItem, quantity: eachItem.quantity + 1}
+      }
+      return eachItem
+    })
+    this.setState({cartList: updatedCartList})
+  }
+
+  decrementCartItemQuantity = id => {
+    const {cartList} = this.state
+    const updatedCartList = cartList
+      .map(eachItem => {
         if (eachItem.dishId === id && eachItem.quantity > 0) {
           return {...eachItem, quantity: eachItem.quantity - 1}
         }
         return eachItem
       })
+      .filter(eachItem => eachItem.quantity > 0)
+    this.setState({cartList: updatedCartList})
+  }
 
-      const filteredCartList = updatedCartList.filter(
-        eachItem => eachItem.dishId !== id || eachItem.quantity > 0,
-      )
-
-      this.setState({cartList: filteredCartList})
-    }
+  removeAllCartItems = () => {
+    this.setState({cartList: ''})
   }
 
   render() {
@@ -55,11 +72,20 @@ class App extends Component {
           cartList,
           addCartItem: this.addCartItem,
           removeCartItem: this.removeCartItem,
+          removeAllCartItems: this.removeAllCartItems,
+          incrementCartItemQuantity: this.incrementCartItemQuantity,
+          decrementCartItemQuantity: this.decrementCartItemQuantity,
         }}
       >
-        <div className="App">
-          <HomeRoute />
-        </div>
+        <Router>
+          <div className="App">
+            <Switch>
+              <Route exact path="/" component={HomeRoute} />
+              <Route exact path="/cart" component={CartRoute} />
+              <Route render={() => <h1>404 Not Found</h1>} />
+            </Switch>
+          </div>
+        </Router>
       </CartContext.Provider>
     )
   }
