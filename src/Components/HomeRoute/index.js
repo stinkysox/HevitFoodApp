@@ -3,7 +3,7 @@ import './index.css'
 import Loader from 'react-loader-spinner'
 import Options from '../OptionsSection'
 import Dishes from '../Dishes'
-import Header from '../Header' // Import the Header component
+import Header from '../Header'
 
 const HomeRoute = () => {
   const [dishDetails, setDishDetails] = useState([])
@@ -61,8 +61,7 @@ const HomeRoute = () => {
 
   const renderSuccessView = () => (
     <div>
-      <Header restaurantName={restaurantName} />{' '}
-      {/* Pass the restaurant name to Header */}
+      <Header restaurantName={restaurantName} />
       <Options
         dishDetails={dishDetails}
         setActiveDish={setActiveDish}

@@ -69,8 +69,7 @@ const Dishes = props => {
         )}
       </div>
       <div className="dish-calories">
-        <p>{dishCalories}</p>
-        <p>calories</p>
+        <p>{dishCalories} calories</p>
       </div>
       <div className="dish-image-container">
         <img src={dishImage} alt={dishDescription} className="dish-image" />
